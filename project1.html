@@ -9,6 +9,7 @@
 	</head>
 	<body class="is-preload">
 
+		
 		<!-- Header -->
 			<header id="header">
 				<a href="index.html" class="title">GPU Analysis</a>
@@ -28,22 +29,38 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">GPU Benchmark Analysis</h1>
-							<p>This project explores various GPU benchmarks to understand performance dynamics and assist in making informed purchasing decisions. We analyze GPUs based on 3D and 2D benchmark scores, performance per dollar, and thermal design power across different categories.</p>
-							
-							<h2>Dataset Overview</h2>
-							<p>This dataset features benchmark scores and specifications for GPUs, including 3D and 2D performance scores, price, performance value, and thermal design power (TDP), sourced from a comprehensive GPU benchmark database.</p>
-							
+							<p>In the rapidly evolving world of technology, Graphics Processing Units (GPUs) play a critical role in a wide range of applications, from gaming and content creation to data science and machine learning. As the demand and technology capabilities increase, understanding the performance metrics and cost-effectiveness of GPUs becomes crucial. This project aims to analyze a dataset of GPU benchmarks to discern performance trends, evaluate the price-performance ratio, and identify the best options for various user needs.</p>
+							<ul>
+								<li>How do GPU prices correlate with their 3D and 2D benchmark scores?</li>
+								<li>Which GPUs offer the best performance per dollar?</li>
+								<li>How does Thermal Design Power (TDP) influence GPU performance?</li>
+								<li>What trends in GPU performance and pricing can be discerned over time?</li>
+							</ul>
+					
+							<h2>Data Overview</h2>
+							<p>The dataset for this analysis is sourced from a comprehensive GPU benchmark database, which aggregates performance data across multiple metrics. This dataset includes the following key attributes:</p>
+							<ul>
+								<li><strong>gpuName:</strong> The model name of the GPU.</li>
+								<li><strong>G3Dmark and G2Dmark:</strong> Scores that measure 3D and 2D performance capabilities.</li>
+								<li><strong>price:</strong> Current market price of the GPU.</li>
+								<li><strong>gpuValue:</strong> Performance per dollar value.</li>
+								<li><strong>TDP:</strong> Maximum heat generation under full load in watts.</li>
+								<li><strong>powerPerf:</strong> Power efficiency relative to performance.</li>
+								<li><strong>testDate:</strong> The date on which the GPU was tested.</li>
+								<li><strong>category:</strong> The market segment of the GPU (Desktop, Workstation, Mobile).</li>
+							</ul>
+							<p>Dataset can be accessed here: <a href="https://www.kaggle.com/datasets/alanjo/gpu-benchmarks/data">GPU Benchmarks Dataset</a></p>
+
 							<h2>Data Pre-processing</h2>
 							<p>Data pre-processing included cleaning duplicate entries, handling missing values by replacing them with median values, and ensuring correct data types for analysis, particularly converting dates into datetime format.</p>
-							
-							<h2>Visualizations and Insights</h2>
-							<p>Visual analysis revealed that higher TDP is generally associated with higher performance scores, and that GPU pricing does not always correlate linearly with performance, highlighting the importance of selecting GPUs based on both price and specifications.</p>
+							<div class="col-12"><span class="image fit"><img src="graph2.jpg" alt="" /></span></div>
+							<h2>Visual Analysis</h2>
+							<p>The scatter plot analyzing the relationship between Thermal Design Power (TDP) and 3D Mark performance scores for GPUs reveals critical insights into how power consumption correlates with performance. A significant spread in performance across GPUs with a TDP of 0-100 watts indicates that many models are optimized to deliver high performance while maintaining low power consumption. The most substantial performance scores are predominantly observed within the 100-250 watts TDP range, suggesting that this bracket represents the optimal balance for achieving high performance without excessive power use. However, as TDP increases beyond 250 watts, the performance gains do not proportionally follow, highlighting diminishing returns for higher energy consumption. This pattern suggests that while some high-TDP GPUs are designed for intense processing tasks, they may not always offer the best efficiency in terms of performance per watt.</p>
 
 							<h2>Impact of Analysis</h2>
 							<p>While this analysis aids consumers and manufacturers alike by highlighting performance benchmarks and cost efficiency, it also raises concerns about its impact on market dynamics and pricing strategies. Additionally, the lack of data on long-term reliability could mislead decisions based solely on performance metrics.</p>
 							
 							<h2>Code and References</h2>
-							<p>The complete analysis, including code and preprocessing steps, is available on <a href="https://github.com/yourrepository">GitHub</a>. Data was sourced from the GPU Benchmarks database, which can be accessed <a href="https://www.gpubenchmark.net">here</a>.</p>
 						</div>
 					</section>
 

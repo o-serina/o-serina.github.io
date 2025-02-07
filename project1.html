@@ -1,81 +1,176 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>GPU Benchmark Analysis</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
 
-		
-		<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="title">GPU Analysis</a>
-				<nav>
+<head>
+	<title>GPU Benchmark Analysis</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+
+
+	<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="title">GPU Analysis</a>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="generic.html" class="active">Analysis</a></li>
+				<li><a href="elements.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<h1 class="major">GPU Benchmark Analysis</h1>
+				<p>In the rapidly evolving world of technology, Graphics Processing Units (GPUs) play a critical role in
+					a wide range of applications, from gaming and content creation to data science and machine learning.
+					As the demand and technology capabilities increase, understanding the performance metrics and
+					cost-effectiveness of GPUs becomes crucial. This project aims to analyze a dataset of GPU benchmarks
+					to discern performance trends, evaluate the price-performance ratio, and identify the best options
+					for various user needs.</p>
+				<ul>
+					<li>How does the price-performance correlation vary across different GPU categories such as Desktop, Workstation, and Mobile? 
+					<li> How have technical advancements impacted the pricing and performance efficiency of newer GPU models?</li>
+					<li>Considering the different categories of GPUs (Desktop, Workstation, or Mobile). How do their prices and performances vary considering the different use case scenario?</li>
+				</ul>
+
+				<h2>Data Overview</h2>
+				<p>The dataset for this analysis is sourced from a Kaggle GPU benchmark database, which covers several years of GPU releases up until 2022, making it an important resource for understanding long-term trends. This dataset includes the following key
+					attributes:</p>
+				<ul>
+					<li><strong>gpuName:</strong> The model name of the GPU.</li>
+					<li><strong>G3Dmark and G2Dmark:</strong> Scores that measure 3D and 2D performance capabilities.
+					</li>
+					<li><strong>price:</strong> Current market price of the GPU.</li>
+					<li><strong>gpuValue:</strong> Performance per dollar value.</li>
+					<li><strong>TDP:</strong> Maximum heat generation under full load in watts.</li>
+					<li><strong>powerPerf:</strong> Power efficiency relative to performance.</li>
+					<li><strong>testDate:</strong> The date when the GPU was benchmarked.</li>
+					<li><strong>category:</strong> The market segment of the GPU (Desktop, Workstation, Mobile).</li>
+				</ul>
+				<p>Dataset used from Kaggle can be accessed here: <a
+						href="https://www.kaggle.com/datasets/alanjo/gpu-benchmarks/data">GPU Benchmarks Dataset</a></p>
+
+				<h2>Data Pre-processing</h2>
+				<p>During the initial phase of my analysis, I conducted a thorough examination of the dataset to
+					assess the quality and structure of the data. One way I used to observe the data in this way, was
+					using box plots to find the outliers in the dataset. This also involved identifying and handling
+					missing values
+					and understanding the distribution of key metrics like G3Dmark, G2Dmark, and price.</p>
+				<p>I started with the visual and statistical exploration of the distribution and relationships in the
+					dataset by summary statistics and pair plots, respectively. We searched for anomalies and trends,
+					especially within the benchmark scores and their pricing. With a clear view of how outlier or null values
+					may affect trend analysis and correlation calculations, we employed an efficient handling of
+					outliers by applying a filtering approach based on percentiles:</p>
+				<ul>
+					<li><strong>G3Dmark Outliers:</strong> Outliers were filtered out using the 1st and 99th percentiles
+						to remove the most extreme data points from both ends of the distribution.</li>
+					<li><strong>G2Dmark Outliers:</strong> Similarly, values outside the 1st and 99th percentiles were
+						removed for G2Dmark scores.</li>
+					<li><strong>Price Outliers:</strong> We focused on removing outliers in the pricing data,
+						particularly by excluding data outside the 99th percentiles to maintain a focus on more
+						typically priced GPUs. From observing the data there were no outliers in the 1st percentile skewing the data, so I only had to get rid of the extremely high prices.</li>
+				</ul>
+				<p>Additionally, I processed missing values, where I removed those rows containing any null values; this ensured our dataset was intact and reliable to work with.</p>
+
+				<!-- Data Understanding and Visualization -->
+				<section>
+					<h2>Data Understanding and Visualization</h2>
+					<p>
+						There are so many different ways this dataset could be looked at, but here I decided to focus on the performance, cost, and category of the GPU. Here are some of the visualizations, which best display the relationships and trends within the data.
+					</p>
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="generic.html" class="active">Analysis</a></li>
-						<li><a href="elements.html">Contact</a></li>
-					</ul>
-				</nav>
-			</header>
+					<div class="col-12"><span class="image fit"><img src="/images/dot graph.png" alt="" /></span></div>
+						<li><strong>3D Performance vs. Price Over Years:</strong> The scatter plot shows that
+							higher-priced GPUs tend to have higher 3D benchmark scores, suggesting a positive
+							correlation between price and performance. However, the spread of points indicates that
+							while high prices generally correspond to high performance, the efficiency in terms of
+							cost-to-performance ratio varies significantly. The reason for this can be seen in the third visual showing "Performance vs. Price by Category"</li>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+												<div class="col-12"><span class="image fit"><img src="/images/pinkgraph.png" alt="" /></span></div>
+						<li><strong>Average G3Dmark Scores by Year:</strong> The line graph shows a consistent upward
+							trend in average 3D benchmark scores from 2010 to 2022. This indicates continuous
+							improvements in GPU technology, with particularly sharp increases post-2016, possibly linked
+							to advancements in GPU architectures and manufacturing processes.</li>
 
-				<!-- Main -->
-					<section id="main" class="wrapper">
-						<div class="inner">
-							<h1 class="major">GPU Benchmark Analysis</h1>
-							<p>In the rapidly evolving world of technology, Graphics Processing Units (GPUs) play a critical role in a wide range of applications, from gaming and content creation to data science and machine learning. As the demand and technology capabilities increase, understanding the performance metrics and cost-effectiveness of GPUs becomes crucial. This project aims to analyze a dataset of GPU benchmarks to discern performance trends, evaluate the price-performance ratio, and identify the best options for various user needs.</p>
-							<ul>
-								<li>How do GPU prices correlate with their 3D and 2D benchmark scores?</li>
-								<li>Which GPUs offer the best performance per dollar?</li>
-								<li>How does Thermal Design Power (TDP) influence GPU performance?</li>
-								<li>What trends in GPU performance and pricing can be discerned over time?</li>
-							</ul>
-					
-							<h2>Data Overview</h2>
-							<p>The dataset for this analysis is sourced from a comprehensive GPU benchmark database, which aggregates performance data across multiple metrics. This dataset includes the following key attributes:</p>
-							<ul>
-								<li><strong>gpuName:</strong> The model name of the GPU.</li>
-								<li><strong>G3Dmark and G2Dmark:</strong> Scores that measure 3D and 2D performance capabilities.</li>
-								<li><strong>price:</strong> Current market price of the GPU.</li>
-								<li><strong>gpuValue:</strong> Performance per dollar value.</li>
-								<li><strong>TDP:</strong> Maximum heat generation under full load in watts.</li>
-								<li><strong>powerPerf:</strong> Power efficiency relative to performance.</li>
-								<li><strong>testDate:</strong> The date on which the GPU was tested.</li>
-								<li><strong>category:</strong> The market segment of the GPU (Desktop, Workstation, Mobile).</li>
-							</ul>
-							<p>Dataset can be accessed here: <a href="https://www.kaggle.com/datasets/alanjo/gpu-benchmarks/data">GPU Benchmarks Dataset</a></p>
+							<div class="col-12"><span class="image fit"><img src="/images/category.png" alt="" /></span></div>
 
-							<h2>Data Pre-processing</h2>
-							<p>Data pre-processing included cleaning duplicate entries, handling missing values by replacing them with median values, and ensuring correct data types for analysis, particularly converting dates into datetime format.</p>
-							<div class="col-12"><span class="image fit"><img src="/images/graph2.jpg" alt="" /></span></div>
-							<h2>Visual Analysis</h2>
-							<p>The scatter plot analyzing the relationship between Thermal Design Power (TDP) and 3D Mark performance scores for GPUs reveals critical insights into how power consumption correlates with performance. A significant spread in performance across GPUs with a TDP of 0-100 watts indicates that many models are optimized to deliver high performance while maintaining low power consumption. The most substantial performance scores are predominantly observed within the 100-250 watts TDP range, suggesting that this bracket represents the optimal balance for achieving high performance without excessive power use. However, as TDP increases beyond 250 watts, the performance gains do not proportionally follow, highlighting diminishing returns for higher energy consumption. This pattern suggests that while some high-TDP GPUs are designed for intense processing tasks, they may not always offer the best efficiency in terms of performance per watt.</p>
+							<li><strong>Performance vs. Price by Category:</strong> The scatter plot provides a clear and detailed visualization of how different GPU categories vary in terms of cost and capability. By categorizing GPUs into Desktop, Workstation, Mobile, and hybrid types, the graph illustrates not only the expected increase in performance with rising prices but also highlights the premium attached to specialized workstation graphics cards designed for professional use. It's particularly notable that while some high-end workstation GPUs command premium prices, the range of performance within each category, especially in mobile and desktop segments, suggests that there are options available at various price points that meet a broad range of performance needs [1]. This visualization is instrumental in demonstrating the diversity of the GPU market, reflecting the complex decision-making process consumers face when balancing budget constraints against performance requirements.
 
-							<h2>Impact of Analysis</h2>
-							<p>While this analysis aids consumers and manufacturers alike by highlighting performance benchmarks and cost efficiency, it also raises concerns about its impact on market dynamics and pricing strategies. Additionally, the lack of data on long-term reliability could mislead decisions based solely on performance metrics.</p>
-							
-							<h2>Code and References</h2>
-						</div>
-					</section>
+				</section>
 
+				<!-- Storytelling Around Visualizations -->
+				<section>
+					<h2>Storytelling Around Visualizations</h2>
+					<p>
+						From the visualizations, we learn that the GPU market is evolving with a clear trend towards
+						higher performance devices. The increasing average scores over the years suggest manufacturers
+						are successfully pushing the technological envelope. Despite this progress, the wide dispersion
+						in performance relative to price underscores a significant variance in how different
+						manufacturers balance cost and performance.
+					</p>
+					<p>
+						While observing the data, one may realize that Workstation GPUs position themselves in the high-end pricing, but in turn, offer excellent performance, which justifies their cost for professional applications needing high reliability and precision. The Desktop GPUs strike a balance between price and performance, and this class of product will appeal both to general consumers and enthusiasts seeking good value for money.
+					</p>
+					<p>
+						For mobile GPUs, power and thermal considerations often cripple their performance, resulting in a large spread that indicates the wide range of requirements from low to high for portable device users. Incidentally, multi-category GPUs, such as those designed for both Mobile and Workstation use, usually demonstrate a broad range of performance but at higher price points, reflecting the premium commanded by versatility in the GPU market.
+					</p>
+					<p>
+						This analysis will help not only buyers in making the right decisions but also manufacturers understand how their products land in the competitive landscape for performance versus cost. In any case, in this focus on price-performance, the buying decision may be too simplified, and other important factors include power consumption, size, and other features such as ray tracing should be considered [2].
+					</p>
+					<p>
+						The insights derived from this plot underscore the evolving dynamics within the GPU market, reflecting both technological advancements and shifting consumer expectations. As the demand for more powerful and efficient GPUs continues to grow, driven by advancements in gaming, AI, and professional graphics work, understanding these trends becomes crucial for both consumers aiming to optimize their investments and manufacturers strategizing product developments.
+					</p>
+
+				</section>
+
+				<!-- Impact of Analysis -->
+				<section>
+					<h2>Impact of Analysis</h2>
+					<p>
+						This GPU benchmark analysis gives very useful insights for both consumers and manufacturers. It helps consumers more easily understand which GPU offers the best value for money and assists them in making wiser choices. This data will also help manufacturers tailor product development to meet actual market demand and perhaps give them a competitive advantage.  
+					</p>
+					<p>
+						Despite these benefits, limitations are likely to apply to wider interpretations from the study. Focusing mainly on performance scores and pricing may lead to necessary omissions of other aspects-such as durability of GPUs, compatibility with a wide range of software, and real-world performance in varied applications. These elements are necessary to guarantee users enjoy a reliable and consistent experience.
+					</p>
+					<p>
+						Furthermore, though the data contains a lot of technical information, it doesn't include user-generated data such as reviews or real-world performance metrics, which could enrich the analysis and offer a more comprehensive understanding of each GPU’s practical impact.
+					</p>
+				</section>
+
+				<!-- References -->
+				<section>
+					<h2>References</h2>
+					<ol>
+						<p>To see a more in-depth process of my work you can acess my Jupyter Notebook HERE</p>
+						<li>How-To Geek article explaining why workstation GPUs are expensive: <a href="https://www.howtogeek.com/821292/why-are-workstation-gpus-so-expensive/">Why Are Workstation GPUs So Expensive?</a></li>
+						<li>Nvidia Developer: <a href="https://developer.nvidia.com/discover/ray-tracing">Ray Tracing</a></li>
+					</ol>
+				</section>
 			</div>
 
-		<!-- Footer -->
+			<!-- Footer -->
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
 					<ul class="menu">
-						<li>&copy; 2025 GPU Benchmark Analysis. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; 2025 GPU Benchmark Analysis. All rights reserved.</li>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 					</ul>
 				</div>
 			</footer>
 
-		<!-- Scripts -->
+			<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -84,5 +179,6 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
-	</body>
+</body>
+
 </html>

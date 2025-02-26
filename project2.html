@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>USA Housing Analysis</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
+</head>
+
+<body class="is-preload">
+
+
+	<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="title">GPU Analysis</a>
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="generic.html" class="active">Analysis</a></li>
+				<li><a href="elements.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<h1 class="major">USA Housing Analysis</h1>
+				<h2>Data Overview</h2>
+				<p>The dataset provides basic information about each listed property, including:</p>
+				<ul>
+					<li><strong>Bedrooms:</strong> Counts the bedrooms.</li>
+					<li><strong>Bathrooms:</strong> Counts the bathrooms.</li>
+					<li><strong>SquareFeet:</strong> Total area in square feet.</li>
+					<li><strong>ZipCode:</strong> Location of the property.</li>
+					<li><strong>CrimeRate:</strong> Local crime rate.</li>
+					<li><strong>SchoolRating:</strong> Rating of nearby schools.</li>
+					<li><strong>Price:</strong> Property's market price.</li>
+				</ul>
+				<p>This data helps understand property values and features across different regions.</p>
+
+				<p>Dataset used from Kaggle can be accessed here: <a
+						href="https://www.kaggle.com/datasets/arnavgupta1205/usa-housing-dataset/data">GPU Benchmarks
+						Dataset</a></p>
+				<h2>Data Pre-processing</h2>
+				<p>During data preprocessing for classification, the duplicates were eliminated first to render the data distinct.
+					Zip codes were transformed from categorical to numeric format through Label Encoding to make them applicable within machine learning algorithms.
+					Numeric features such as Bedrooms, Bathrooms, and SquareFeet were normalized to have a uniform scale within the data in order to enhance model performance.
+					Price was categorized into "Low", "Medium", and "High" classes using quantile-based
+					discretization, and hence could be employed for classification, and the first Price column was deleted
+					because the focus now shifted to classification. These activities prepared the dataset for effective
+					machine learning modeling by maintaining data purity, relevancy, and appropriateness for the algorithms.</p>
+
+				<h2>Data Understanding and Visualization</h2>
+				<h2>Storytelling Around Visualizations</h2>
+				<h2>Impact of Analysis</h2>
+
+				<!-- References -->
+
+					<h2>References</h2>
+					<ol>
+						<p>To see a more in-depth process of my work you can access my Jupyter Notebook <a
+								href="usahousing.ipynb">HERE</a></p>
+					</ol>
+				</section>		
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer" class="wrapper alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; 2025 GPU Benchmark Analysis. All rights reserved.</li>
+						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -2,94 +2,222 @@
 <html>
 
 <head>
-	<title>USA Housing Analysis</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript>
-		<link rel="stylesheet" href="assets/css/noscript.css" />
-	</noscript>
+    <title>Loan Repayment Classification Model</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
 </head>
 
 <body class="is-preload">
 
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="title">Loan Repayment Analysis</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generic.html" class="active">Analysis</a></li>
+                <li><a href="elements.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-	<!-- Header -->
-	<header id="header">
-		<a href="index.html" class="title">Classification</a>
-		<nav>
-			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="generic.html" class="active">Analysis</a></li>
-				<li><a href="elements.html">Contact</a></li>
-			</ul>
-		</nav>
-	</header>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-	<!-- Wrapper -->
-	<div id="wrapper">
+        <!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <h1 class="major">Loan Repayment Analysis</h1>
+                <h2>Introduction to the Problem</h2>
+                <p>In the banking sector, precise loan repayment forecasting is essential for controlling credit risk and
+                    profitability. Non-repayment of loans can result in substantial financial loss and
+                    affect the stability of lending institutions. This project attempts to use data-driven insights to
+                    predict whether borrowers will repay their loans based on their financial history and other
+                    associated factors. By grasping these dynamics, lenders can make sound choices and customize
+                    their approaches to reduce risk and encourage financial well-being.</p>
 
-		<!-- Main -->
-		<section id="main" class="wrapper">
-			<div class="inner">
-				<h1 class="major">USA Housing Analysis</h1>
-				<h2>Data Overview</h2>
-				<p>The dataset provides basic information about each listed property, including:</p>
-				<ul>
-					<li><strong>Bedrooms:</strong> Counts the bedrooms.</li>
-					<li><strong>Bathrooms:</strong> Counts the bathrooms.</li>
-					<li><strong>SquareFeet:</strong> Total area in square feet.</li>
-					<li><strong>ZipCode:</strong> Location of the property.</li>
-					<li><strong>CrimeRate:</strong> Local crime rate.</li>
-					<li><strong>SchoolRating:</strong> Rating of nearby schools.</li>
-					<li><strong>Price:</strong> Property's market price.</li>
-				</ul>
-				<p>This data helps understand property values and features across different regions.</p>
+                <h2>Data Overview</h2>
+                <p>This project uses a dataset Kaggle that contains various features that are pertinent
+                    to loan repayment prediction. The objective is to predict loans as either fully paid or not, helping
+                    an institution in credit risk management.</p>
+                <ul>
+                    <li><strong>Purpose:</strong> The reason for the loan (e.g., debt consolidation, credit card).</li>
+                    <li><strong>Interest Rate:</strong> The annual interest rate of the loan.</li>
+                    <li><strong>Credit Policy:</strong> Whether the borrower met the credit underwriting criteria.</li>
+                    <li><strong>FICO Score:</strong> A measure of credit risk based on credit reports.</li>
+                    <li><strong>Income:</strong> The borrower's annual income, indicating economic stability.</li>
+                    <li><strong>Inquiries Last 6 Months:</strong> The number of inquiries on the borrower’s credit
+                        report.</li>
+                    <li><strong>Loan Status:</strong> The outcome of the loan (Fully Paid/Not Paid).</li>
+                </ul>
+                <p>Access the dataset used for this analysis here: <a
+                        href="https://www.kaggle.com/datasets/some-dataset-link">Loan Data Dataset</a>.</p>
 
-				<p>Dataset used from Kaggle can be accessed here: <a
-						href="https://www.kaggle.com/datasets/arnavgupta1205/usa-housing-dataset/data">USA Housing
-						Dataset</a></p>
-				<h2>Data Pre-processing</h2>
-				<p>During data preprocessing for classification, the duplicates were eliminated first to render the data distinct.
-					Zip codes were transformed from categorical to numeric format through Label Encoding to make them applicable within machine learning algorithms.
-					Numeric features such as Bedrooms, Bathrooms, and SquareFeet were normalized to have a uniform scale within the data in order to enhance model performance.
-					Price was categorized into "Low", "Medium", and "High" classes using quantile-based
-					discretization, and hence could be employed for classification, and the first Price column was deleted
-					because the focus now shifted to classification. These activities prepared the dataset for effective
-					machine learning modeling by maintaining data purity, relevancy, and appropriateness for the algorithms.</p>
+                <h2>Data Pre-processing</h2>
 
-				<h2>Data Understanding and Visualization</h2>
-				<h2>Storytelling Around Visualizations</h2>
-				<h2>Impact of Analysis</h2>
+                <code>categorical_cols = loan_data.select_dtypes(include=['object']).columns
+                </code>
 
-				<!-- References -->
+                <p>This line of code selects all columns in the data set that are of type 'object', which typically
+                    refers to categorical data in pandas. These columns are then given to the variable
+                    categorical_cols. Categorical data is employed to describe variables with finite, fixed numbers of possible
+                    values (also known as categories). For example, the 'purpose' column in your data, which has
+                    categories like 'debt_consolidation' and 'credit_card', falls under this category. The reason for
+                    identifying these columns separately is that most machine learning models require numerical input,
+                    so categorical variables will often need to be transformed into a numerical format using techniques
+                    like one-hot encoding or label encoding.</p>
 
-					<h2>References</h2>
-					<ol>
-						<p>To see a more in-depth process of my work you can access my Jupyter Notebook <a
-								href="usahousing.ipynb">HERE</a></p>
-					</ol>
-				</section>		
-			</div>
+                <code>numerical_cols = loan_data.select_dtypes(exclude=['object']).columns.drop('not.fully.paid')
+                </code>
 
-			<!-- Footer -->
-			<footer id="footer" class="wrapper alt">
-				<div class="inner">
-					<ul class="menu">
-						<li>&copy; 2025 GPU Benchmark Analysis. All rights reserved.</li>
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul>
-				</div>
-			</footer>
+                <p>This line selects all columns not of type 'object', i.e., numeric data types. From this
+                    selection, it then removes the column 'not.fully.paid' using the.drop() function. The reason for
+                    exclude 'not.fully.paid' here might be because this column is typically treated as the target
+                    variable (dependent variable) in a predictive model rather than as a feature (independent variable).
+                    The rest of the columns, held in numerical_cols, will probably contain continuous or discrete
+                    numerical values, which can directly be used for calculations and in statistical models.</p>
 
-			<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+                <h2>Data Visualization and Insights</h2>
+                <p>Data visualization plays a crucial role in understanding the underlying patterns in the data. Below
+                    are the visualizations created to explore relationships between various features:</p>
+
+                <!-- FICO Score Distribution by Loan Status -->
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="/images/FICOhisto.png" alt="" /></span></div>
+                </pre>
+                <h3>Histogram of FICO Scores</h3>
+                <p>This histogram shows the distribution of FICO scores among the loan applicants. FICO scores, which
+                    are important determinants of creditworthiness, appear to be centered on mid-range values,
+                    suggesting a moderate risk of default among the pool of borrowers. The distribution is fairly skewed
+                    towards higher scores, consistent with the reality that a significant percentage of borrowers have good credit profiles,
+                    which assists lenders in approximating the likelihood of loan defaults.</p>
+                <!-- Inserting Python code for a histogram -->
+
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="/images/barchart.png" alt="" /></span></div>
+                </pre>
+                <h3>Bar Chart of Loan Purposes</h3>
+                <p>The bar graph categorizes the loans in terms of their purposes, where 'credit card' and 'debt consolidation'
+                    surfacing as the most common reason for borrowing. Such a trend captures a general interest among
+                    borrowers to service outstanding debt or pay for credit card purchases, which may indicate wider
+                    economic conditions or consumer trends. They are of value to financial
+                    institutions to make their products and marketing strategies in alignment.</p>
+                <!-- Inserting Python code for a bar chart -->
+
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="/images/scatterplot.png" alt="" /></span></div>
+                </pre>
+                <h3>Scatter Plot of Annual Icome vs. Debt-to-Income Ratio</h3>
+                <p> This scatter plot illustrates the relationship between the logged annual incomes of the borrowers
+                    and their debt-to-income ratios. The plot shows a wide dispersion of debt-to-income ratios across
+                    various income levels, without any apparent trend that higher incomes have lower ratios.
+                    This graph is useful for finding outliers and seeing how income levels affect or
+                    pertain to financial management and borrowing needs.</p>
+                <!-- Inserting Python code for a bar chart -->
+
+
+                <h2>Modeling</h2>
+                <p>Logistic Regression was first selected in this research to resolve the binary classification
+                    problem of determining if loans are repaid in full or not. Logistic Regression suits this
+                    tasks since it explicitly models the probability of a binary event and therefore is a natural
+                    and interpretable choice for binary classification problems. The model operates by fitting a
+                    logistic function to a linear combination of input features, transforming the output into a
+                    probability score between 0 and 1. The score is typically thresholded at some point (typically 0.5) to
+                    classify observations into one of two categories. While beneficial for its simplicity and the
+                    interpretive nature of its coefficients, Logistic Regression is limited by its assumption of a
+                    linear relationship between the independent variables and the log odds of the dependent variable.
+                    This can lead to underperformance if the relationships in the data are non-linear unless proper
+                    transformations of data are undertaken.
+
+                    Given these limitations, a RandomForestClassifier was subsequently implemented to better handle
+                    potential non-linearities and provide a more robust approach, especially useful in the framework of
+                    the imbalance in our dataset. Below is the code for training and testing the RandomForest
+                    model:</p>
+
+                <h2>Evaluation</h2>
+
+
+                <p>The evaluation of the Logistic Regression model indicated that while it achieves high accuracy levels
+                    (approximately 84% in training and test sets), these are potentially misleading due to
+                    imbalanced character of the dataset. This imbalance led to a shift to the
+                    RandomForestClassifier, whose performance was subsequently thoroughly tested. The RandomForest model
+                    showed a better capability to manage the dataset, which was especially relevant considering
+                    the low recall and precision that were faced with the Logistic Regression model for the minority class
+                    of loans that are not paid in full. For instance, the correctness for the 'not fully paid' loans
+                    under Logistic Regression was 25%, while the recall was lower at 2%, indicating that the
+                    model was very conservative and did not account for the overwhelming majority of this important class. This failure
+                    is serious in a financial environment where the cost of being wrong about a non-payment is high.
+                    The RandomForestClassifier was created to improve upon these values with its capacity to model more
+                    complex patterns without an assumption of linearity.
+                    
+                    In conclusion, the use of accuracy as a metric in imbalanced datasets can be deceiving, reflecting
+                    the underlying class distribution more than the model's predictive capabilities. Metrics like the
+                    F1-score, the balance of precision and recall, are significant, especially when they indicate great
+                    improvement over the advanced modeling techniques employed, as observed in the classification
+                    report produced by the RandomForest model.</p>
+
+                    <h3>Linear Regression Model Scores:</h3>
+                    <pre>
+                        <div class="col-12"><span class="image fit"><img src="/images/eval.png" alt="" /></span></div>
+                    </pre>
+
+                    <h3>Random Forest Model Scores:</h3>
+                    <pre>
+                        <div class="col-12"><span class="image fit"><img src="/images/eval2.png" alt="" /></span></div>
+                    </pre>
+
+
+                <h2>Storytelling</h2>
+                <p>The initial modeling with Logistic Regression indicated the inadequacy of identifying 'not fully
+                    paid' loans and the need for advanced techniques. Transition to a RandomForestClassifier
+                    had demonstrated its ability for better management of non-linear relations and coping with imbalances by its
+                    ensemble approach. This adjustment quite significantly improved 'not fully paid' loan recall but
+                    presented a trade-off with accuracy, highlighting the fine balance in predictive modeling.</p>
+
+                <p>This development highlights the limitations of dealing with imbalanced data and emphasizes the
+                    importance of continually refining the model. With the addition of advanced techniques like RandomForest
+                    and fine-tuning the thresholds for classification, we've strived towards a model that is more aligned
+                    with the dynamics of financial risk management. Every step in our modeling process brings us
+                    closer to coming up with a sound tool that improves decision quality in financial lending.</p>
+
+                <h2>Impact</h2>
+                <p>The loan repayment forecast project has significant social and ethical implications, both positive and negative. On the positive side, by enhancing the precision of loan repayment forecasts, the project can help financial institutions reduce the risk of loan defaults, leading to more stable banking operations and, consequently, lower interest rates for all borrowers due to less risk. Secondly, accurate predictions can enable lenders to offer consumers more tailored financial products, furthering financial access for under-banked segments that would otherwise be scored as too great a risk.</p>
+
+                <p>However, with the benefit comes potential adverse consequences. Relying on stale data within a predictive model permits earlier prejudices to persist. If the data reflects discriminatory patterns of lending in the past or socioeconomic biases, the model would be perpetuating these practices unwittingly by biased instead of merit-based grounds, denying loans to certain groups or individuals. This would further solidify social disparities and restrict economic mobility. Additionally, invasion of privacy is a possibility because sensitive personal financial data is being used and processed, presenting threats to data security and data breach. Ethically, there is also the issue of transparency; borrowers do not know how their loan applications are determined, which can lead to distrust in financial systems.</p>
+                    
+                <p>Generally speaking, as much as the project aims to implement technical innovations to loan repayment projections, it must be treated with a keen appreciation of its broader social and moral implications. That it must avoid the unfair use of algorithmic decision-making and maintain robust data protection mechanisms in place is paramount to the prevention of this project's negative impact.</p>
+
+
+                <h2>References</h2>
+                <ol>
+                    <li>To explore the process further, you can access my Jupyter Notebook <a
+                            href="loandata.ipynb">HERE</a>.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer" class="wrapper alt">
+            <div class="inner">
+                <ul class="menu">
+                    <li>&copy; 2025 Loan Repayment Analysis. All rights reserved.</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
 
 </body>
 

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Student Performance Prediction Model</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="index.html" class="title">Student Performance Prediction</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generic.html" class="active">Analysis</a></li>
+                <li><a href="elements.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <h1 class="major">Student Performance Analysis</h1>
+                
+                <!-- Introduce the problem and dataset -->
+                <h2>Introduction to the Problem and Dataset</h2>
+                <p>This project addresses the educational challenge of predicting student performance through quantitative metrics. We analyze a dataset consisting of 10,000 student records with features such as study hours, previous academic scores, extracurricular activities, and sleep hours, aiming to predict a continuous 'Performance Index' that reflects students' academic success.</p>
+
+                <!-- What is regression and how does it work? -->
+                <h2>What is Regression and How Does It Work?</h2>
+                <p>Regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. The simplest form, linear regression, assumes a straight-line relationship between the predictors and the response. It calculates coefficients for each input feature which quantifies their influence on the target variable. The equation of a linear regression model is:</p>
+                <code>Y = β0 + β1X1 + β2X2 + ... + βnXn + ε</code>
+                <p>where Y is the predicted value, β0 is the intercept, β1 to βn are the coefficients of the features X1 to Xn, and ε represents the error term.</p>
+
+                <!-- Experiment 1 -->
+                <h2>Experiment 1</h2>
+
+                <!-- Experiment 1: Data understanding -->
+                <h3>Data Understanding</h3>
+                <p>Our initial step in understanding the data involved generating descriptive statistics and visualizing distributions of features and the target variable. Correlation matrices were particularly useful to identify features most related to the performance index, highlighting potential predictors for the regression model.</p>
+
+                <!-- Experiment 1: Pre-processing -->
+                <h3>Pre-processing</h3>
+                <p>Pre-processing involved several key steps: encoding the categorical 'Extracurricular Activities' variable from 'Yes'/'No' to '1'/'0', normalizing the scale of continuous variables to prevent model bias towards variables with larger scales, and handling missing values, although this dataset was free of such issues. These steps ensure that the data is clean and formatted correctly for modeling.</p>
+
+                <!-- Experiment 1: Modeling -->
+                <h3>Modeling</h3>
+                <p>We implemented a linear regression model using scikit-learn, a popular Python library for machine learning. The model was trained with 80% of the data reserved for training and the remaining 20% for testing, ensuring robust evaluation metrics.</p>
+                
+                <!-- Experiment 1: Evaluation -->
+                <h3>Evaluation</h3>
+                <p>The linear regression model's performance was evaluated using the Root Mean Squared Error (RMSE), which provides a measure of the model's prediction errors. A lower RMSE value indicates a model that more accurately predicts student performance. This initial evaluation helps us understand the model's effectiveness and guides potential improvements in future experiments.</p>
+
+                <!-- Placeholder for remaining sections -->
+                <h2>Experiment 2</h2>
+                <p>Details about the second experiment will be added here.</p>
+
+                <h2>Experiment 3</h2>
+                <p>Details about the third experiment will be added here.</p>
+
+                <h2>Impact Section</h2>
+                <p>Discussion on the possible social and ethical impacts of the project.</p>
+
+                <h2>Conclusion</h2>
+                <p>Summary of what was learned from this project and the different experiments conducted.</p>
+
+                <h2>References</h2>
+                <ol>
+                    <li>To explore the process further, you can access my Jupyter Notebook <a
+                            href="StudentData.ipynb">HERE</a>.</li>
+                </ol>
+
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer" class="wrapper alt">
+            <div class="inner">
+                <ul class="menu">
+                    <li>&copy; 2025 Student Performance Analysis. All rights reserved.</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </footer>
+
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+
+</body>
+</html>

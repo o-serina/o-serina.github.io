@@ -31,11 +31,23 @@
                 
                 <!-- Introduce the problem and dataset -->
                 <h2>Introduction to the Problem and Dataset</h2>
-                <p>This project addresses the educational challenge of predicting student performance through quantitative metrics. We analyze a dataset consisting of 10,000 student records with features such as study hours, previous academic scores, extracurricular activities, and sleep hours, aiming to predict a continuous 'Performance Index' that reflects students' academic success.</p>
+                <p>In this project, the objective is to develop a regression model to predict student academic performance, represented by a numerical <strong>Performance Index</strong>. Accurately predicting performance can help educators and academic advisors identify students who may need additional support, enabling timely interventions to improve academic outcomes. The dataset used is a realistic synthetic dataset named <code>Student_Performance.csv</code>, consisting of <strong>10,000 student records</strong>. Each record contains the following features:</p>
+                
+                <ul>
+                    <li><strong>Hours Studied</strong> – Number of hours the student studies per day</li>
+                    <li><strong>Previous Scores</strong> – Student’s scores from prior academic assessments</li>
+                    <li><strong>Extracurricular Activities</strong> – Whether the student participates in extracurricular activities (Yes/No)</li>
+                    <li><strong>Sleep Hours</strong> – Average number of hours the student sleeps per night</li>
+                    <li><strong>Sample Question Papers Practiced</strong> – Number of sample papers the student has practiced</li>
+                    <li><strong>Performance Index</strong> – <em>Target variable</em> representing overall academic performance, ranging from 10 to 100</li>
+                </ul>
+                
+                <p>This is framed as a <strong>regression problem</strong> where the goal is to use these features to accurately predict the continuous value of the <em>Performance Index</em>.</p>
+                
 
                 <!-- What is regression and how does it work? -->
                 <h2>What is Regression and How Does It Work?</h2>
-                <p>Regression is a statistical method used to model the relationship between a dependent variable and one or more independent variables. The simplest form, linear regression, assumes a straight-line relationship between the predictors and the response. It calculates coefficients for each input feature which quantifies their influence on the target variable. The equation of a linear regression model is:</p>
+                <p>Regression is a statistical method of modeling the relationship between an independent variable and a dependent variable, and between one or more independent variables and a dependent variable. The simplest, linear regression, models a linear relationship between predictors and a response variable. It estimates coefficients for each input feature that quantify their effect on the target variable. The linear regression formula is:</p>
                 <code>Y = β0 + β1X1 + β2X2 + ... + βnXn + ε</code>
                 <p>where Y is the predicted value, β0 is the intercept, β1 to βn are the coefficients of the features X1 to Xn, and ε represents the error term.</p>
 
@@ -44,33 +56,48 @@
 
                 <!-- Experiment 1: Data understanding -->
                 <h3>Data Understanding</h3>
-                <p>Our initial step in understanding the data involved generating descriptive statistics and visualizing distributions of features and the target variable. Correlation matrices were particularly useful to identify features most related to the performance index, highlighting potential predictors for the regression model.</p>
+                <p>To better understand the dataset before building a model, we created the following visualizations:</p>
+                
+                <h4>1. Hours Studied vs Performance Index</h4>
+                <p>This scatter plot shows a clear positive relationship between hours studied and the performance index. Students who study more tend to achieve higher performance scores. Additionally, students involved in extracurricular activities are highlighted, showing that although both groups can perform well, high scorers often put in more study hours.</p>
+
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="images/scatterplot1.png" alt="" /></span></div>
+                </pre>
+
+                <h4>2. Performance Index by Extracurricular Activities</h4>
+                <p>This box plot compares the distribution of performance scores for students based on their involvement in extracurricular activities. While both groups have overlapping performance ranges, those not involved in activities tend to have a slightly higher median performance, possibly due to more available study time. However, the variation shows that high performance is still achievable in both cases.</p>
+
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="images/boxplot1.png" alt="" /></span></div>
+                </pre>
 
                 <!-- Experiment 1: Pre-processing -->
                 <h3>Pre-processing</h3>
                 <p>Pre-processing involved several key steps: encoding the categorical 'Extracurricular Activities' variable from 'Yes'/'No' to '1'/'0', normalizing the scale of continuous variables to prevent model bias towards variables with larger scales, and handling missing values, although this dataset was free of such issues. These steps ensure that the data is clean and formatted correctly for modeling.</p>
 
-                <!-- Experiment 1: Modeling -->
-                <h3>Modeling</h3>
-                <p>We implemented a linear regression model using scikit-learn, a popular Python library for machine learning. The model was trained with 80% of the data reserved for training and the remaining 20% for testing, ensuring robust evaluation metrics.</p>
-                
-                <!-- Experiment 1: Evaluation -->
-                <h3>Evaluation</h3>
-                <p>The linear regression model's performance was evaluated using the Root Mean Squared Error (RMSE), which provides a measure of the model's prediction errors. A lower RMSE value indicates a model that more accurately predicts student performance. This initial evaluation helps us understand the model's effectiveness and guides potential improvements in future experiments.</p>
+<!-- Experiment 1: Modeling -->
+<h3>Modeling</h3>
+<p>To build our first predictive model, we implemented a <strong>Linear Regression</strong> algorithm using the <code>LinearRegression</code> class from the scikit-learn library. Linear regression is a foundational machine learning technique that models the relationship between a dependent variable and one or more independent variables by fitting a linear equation to the observed data. In this case, our dependent variable is the <em>Performance Index</em>, and the independent variables include factors like <em>Hours Studied</em>, <em>Previous Scores</em>, <em>Sleep Hours</em>, <em>Sample Question Papers Practiced</em>, and <em>Extracurricular Activities</em> (numerically encoded). We split the dataset into training (80%) and testing (20%) sets to ensure the model generalizes well to unseen data. The model was then trained using the training set by minimizing the residual sum of squares between the observed and predicted values.</p>
+
+<!-- Experiment 1: Evaluation -->
+<h3>Evaluation</h3>
+<p>The model was evaluated using the <strong>Root Mean Squared Error (RMSE)</strong> metric, which measures the average magnitude of the prediction errors. A lower RMSE indicates a better-fitting model. In this initial experiment, the linear regression model achieved an RMSE of approximately <strong>2.02</strong>. This relatively low error suggests that the model performs well in predicting student performance based on the given features. These results provide a strong baseline for further model improvement through feature engineering or alternative regression techniques in future experiments.</p>
+
 
                 <!-- Placeholder for remaining sections -->
                 <h2>Experiment 2</h2>
-                <p>Details about the second experiment will be added here.</p>
-
+                <p>In the second experiment, we aimed to improve the model by removing the <em>Sleep Hours</em> feature, which showed low correlation with the target variable. The hypothesis was that excluding irrelevant or weakly correlated features might reduce noise and improve prediction performance. We retrained the linear regression model using the reduced feature set and evaluated it with the same train/test split. However, the RMSE slightly increased to <strong>2.18</strong>, suggesting that even though <em>Sleep Hours</em> appeared weakly correlated, it still contributed marginally to model accuracy when combined with other features.</p>
+                
                 <h2>Experiment 3</h2>
-                <p>Details about the third experiment will be added here.</p>
-
+                <p>For the third experiment, we explored a more advanced machine learning model, the <strong>Random Forest Regressor</strong>. Random Forest is an ensemble method that combines multiple decision trees to make predictions and is known for handling non-linear relationships well. We used all features in this model and evaluated it using the same test split. Interestingly, the RMSE increased to <strong>2.27</strong>, slightly worse than both linear regression models. This result could stem from the Random Forest's complexity not offering additional benefits for this relatively simple and clean dataset, or possibly from redundancy among input features. Despite this, the experiment demonstrated the value of testing more complex models, even if they don't always outperform simpler baselines.</p>
+                
                 <h2>Impact Section</h2>
-                <p>Discussion on the possible social and ethical impacts of the project.</p>
-
+                <p>This project has important social and ethical impact. On the positive side, student performance prediction has the potential to help teachers identify poorly performing students early and provide targeted intervention to improve academic outcomes. There are also ethical risks. Predictive models, when inappropriately applied, can lead to bias, stereotyping, or discrimination against students. For example, students who are labeled "low-performing" could be denied opportunities to which they are entitled. Therefore, it's crucial that such models are implemented with transparency, fairness, and human oversight in schools.</p>
+                
                 <h2>Conclusion</h2>
-                <p>Summary of what was learned from this project and the different experiments conducted.</p>
-
+                <p>This project provided valuable insights into the process of building, testing, and evaluating regression models. We saw that even minor preprocessing decisions, such as removing a feature, can affect model performance. While the linear regression model performed best overall, experimenting with feature selection and trying a Random Forest model reinforced the importance of iterative testing. Most importantly, we learned that simpler models can sometimes outperform more complex ones depending on the data. This reinforces the idea that machine learning isn't just about choosing powerful algorithms, it's also about understanding your data and choosing the right tools.</p>
+                
                 <h2>References</h2>
                 <ol>
                     <li>To explore the process further, you can access my Jupyter Notebook <a

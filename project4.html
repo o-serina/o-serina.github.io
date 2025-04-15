@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Laptop Clustering Analysis</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="assets/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+    <header id="header">
+        <a href="index.html" class="title">Laptop Clustering Project</a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="generic.html" class="active">Clustering Report</a></li>
+                <li><a href="elements.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="wrapper">
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <h1 class="major">Laptop Clustering Report</h1>
+
+                <h2>Introduction to the Problem</h2>
+                <p>With so many laptop models available, consumers are likely to be swamped by choice. In this project, clustering is applied to see if meaningful patterns and groupings can be extracted on the basis of hardware specifications, price, and performance. The goal is to reveal distinct consumer segments, like budget, mid-range, gamer, or pro users, solely from data to assist both consumers and producers in making decisions.</p>
+
+                <h2>What is Clustering and How Does it Work?</h2>
+                <p>Clustering is a machine learning technique that groups similar data points together without predefined labels. We applied <strong>KMeans clustering</strong>, which partitions the data into k clusters by minimizing the variance within each cluster. The algorithm iteratively assigns points to the nearest cluster center, recalculating centers until convergence. To visualize high-dimensional data, we also used <strong>Principal Component Analysis (PCA)</strong>, a dimensionality reduction technique that helps present complex patterns in two dimensions.</p>
+
+                <h2>Introduce the Data</h2>
+                <p>The dataset contains 991 rows and 22 columns of laptop specifications collected from various manufacturers. Each entry represents a unique laptop configuration and includes:</p>
+                <ul>
+                    <li><strong>brand</strong>: Laptop manufacturer</li>
+                    <li><strong>Model</strong>: Model name of the laptop</li>
+                    <li><strong>Price</strong>: Retail price in INR</li>
+                    <li><strong>Rating</strong>: User rating out of 100</li>
+                    <li><strong>processor_brand</strong>: Brand of the CPU </li>
+                    <li><strong>processor_tier</strong>: Category of processor </li>
+                    <li><strong>num_cores</strong>: Number of physical cores in the processor</li>
+                    <li><strong>num_threads</strong>: Number of threads the CPU can execute</li>
+                    <li><strong>ram_memory</strong>: RAM size in GB</li>
+                    <li><strong>primary_storage_type</strong>: Type of main storage </li>
+                    <li><strong>primary_storage_capacity</strong>: Size of primary storage in GB</li>
+                    <li><strong>secondary_storage_type</strong>: Type of secondary storage </li>
+                    <li><strong>secondary_storage_capacity</strong>: Size of secondary storage in GB</li>
+                    <li><strong>gpu_brand</strong>: GPU manufacturer </li>
+                    <li><strong>gpu_type</strong>: Type of graphics processor </li>
+                    <li><strong>is_touch_screen</strong>: Whether the laptop has a touch-enabled screen</li>
+                    <li><strong>display_size</strong>: Physical screen size in inches</li>
+                    <li><strong>resolution_width</strong> and <strong>resolution_height</strong>: Pixel dimensions of the screen</li>
+                    <li><strong>OS</strong>: Operating system </li>
+                    <li><strong>year_of_warranty</strong>: Duration of warranty in years</li>
+                </ul>
+
+                <p>This diverse set of features was ideal for clustering because it spans performance, design, and pricing aspects of laptops, allowing us to identify natural groupings within the market.</p>
+
+                <p>Dataset used from Kaggle can be accessed here: <a
+                    href="https://www.kaggle.com/datasets/bhavikjikadara/brand-laptops-dataset?resource=download">GPU Benchmarks Dataset</a></p>
+
+                <h2>Data Understanding and Visualization</h2>
+                <p>We explored numerical distributions and correlations between key features. Histograms showed that most laptops fall into mid-range categories (e.g., 8GB RAM, mid-price). A correlation heatmap confirmed strong relationships between variables like processor tier, number of threads, and price. Boxplots indicated that higher RAM and better processor tiers generally increase laptop price. A countplot for brand distribution showed that certain manufacturers dominate specific segments of the market, giving insight into potential brand-based clustering biases.</p>
+
+                <p>The figure below presents the distribution of several core numeric features. The price distribution is heavily right-skewed, with most laptops priced below ₹100,000. Ratings are normally distributed, centering around 65–70. RAM shows two major modes around 8GB and 16GB, reflecting standard configurations. Processor cores and threads have spikes at typical architecture levels, such as 4, 8, and 12 threads. Primary storage capacity shows strong peaks at 512GB and 1TB, suggesting market standardization. These trends validate our choice of features for clustering and hint at potential grouping behavior in the dataset.</p>
+
+                <pre>
+                    <div class="col-12"><span class="image fit"><img src="images/proj4.png" alt="" /></span></div>
+                </pre>
+
+
+
+
+                <h2>Pre-processing the Data</h2>
+                <p>Before modeling, the dataset needed to be preprocessed to ensure quality and consistency. Irrelevant columns like the laptop index and model name were removed to reduce noise. The 'year_of_warranty' column, which originally contained mixed data types, was cleaned and converted into integers for numerical processing. Categorical variables such as GPU brand, processor tier, and operating system were encoded into numerical values using label encoding so that they could be properly interpreted by clustering algorithms. To avoid bias caused by differing feature scales, all numerical variables were standardized using the StandardScaler method. This normalization process brought all values into the same range, allowing each feature to contribute proportionally to the distance calculations during clustering.</p>
+
+
+                <h2>Modeling (Clustering)</h2>
+                <p>Using the Elbow Method, we determined that <strong>k = 4</strong> was the most suitable number of clusters. KMeans was selected over hierarchical clustering due to its scalability and interpretability. After clustering, PCA was used to reduce dimensions for visualization. The resulting scatter plot showed clearly separated clusters, confirming that the model found consistent grouping patterns.</p>
+                <div class="col-12"><span class="image fit"><img src="images/plotcluster.png" alt="PCA Cluster Visualization" /></span></div>
+                <p>The PCA plot below reveals the four clusters found by the KMeans model. The clusters all occupy a specific region of the 2D principal component space, which reveals that the model was able to capture underlying variance in the data, and the fact that clusters are separated reveals that the features selected (RAM, number of cores, and price) have a strong role in separating product types.</p>
+                <p>To further describe these clusters, we computed average values for important features in each set. The table below represents important specifications such as price, rating, RAM, processor cores, threads, and storage.</p>
+                <div class="col-12"><span class="image fit"><img src="images/clustering.png" alt="Cluster Summary Statistics" /></span></div>
+                <p>Cluster 3 averages the highest price (~₹184,545), RAM (~20GB), and core/thread counts, implying high-performance laptops for gaming or professional workloads. Cluster 1 is the lowest priced (~₹49,000) with modest specs, making it the best for general-purpose use. Cluster 0 and 2 fall between these extremes, covering balanced and power-user segments. These figures validate our qualitative analysis and ensure that the clusters represent actual market segments in the real world.</p>
+                
+
+                <h2>Storytelling (Clustering Analysis)</h2>
+                <p>We analyzed each cluster to understand its characteristics. Summary statistics revealed four meaningful segments:</p>
+                <ul>
+                    <li><strong>Cluster 0:</strong> Entry-level devices with lower specs and affordable pricing. Ideal for casual use or students on a budget.</li>
+                    <li><strong>Cluster 1:</strong> Mid-tier laptops with balanced specs, targeting general productivity users and light multitasking.</li>
+                    <li><strong>Cluster 2:</strong> High-end machines featuring powerful CPUs, GPUs, and higher prices—targeted toward gamers or creators.</li>
+                    <li><strong>Cluster 3:</strong> Lightweight ultrabooks with strong battery life, solid screens, and premium design, often priced moderately to high.</li>
+                </ul>
+                <p>These insights validate the clustering model and provide an intuitive framework for understanding the market landscape without relying on brand marketing or subjective review scores.</p>
+
+                <h2>Impact Section</h2>
+                <p>This clustering project has real-world uses. For consumers, it streamlines decision-making by bringing to the forefront clusters that most closely match their needs. For producers, it unveils potential market niches and streamlines product development. Ethical concerns must be taken into account, though. Relying too much on clustering can solidify socioeconomic boundaries, if price is employed as a proxy for capability, and can exclude user interests that are not represented in the data. Transparency, diversity of information sources, and ongoing evaluation are necessary to ensure fair outcomes.</p>
+
+                <h2>References</h2>
+                <ol>
+                    <li>Scikit-learn documentation: <a href="https://scikit-learn.org/">https://scikit-learn.org</a></li>
+                    <li>Matplotlib and Seaborn for visualization</li>
+                </ol>
+                <p>Jupyter Notebook with all code: <a href="laptopdata.ipynb">Download here</a></p>
+            </div>
+        </section>
+
+        <footer id="footer" class="wrapper alt">
+            <div class="inner">
+                <ul class="menu">
+                    <li>&copy; 2025 Laptop Clustering Report. All rights reserved.</li>
+                    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.scrollex.min.js"></script>
+        <script src="assets/js/jquery.scrolly.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+</body>
+
+</html>
